@@ -2,7 +2,7 @@ const Tree = require('./tree_data_mock.js');
 
 function incValue(node_id, value_increment) {
     // Величина value_increment всегда положительно число
-    if(value_increment < 0) return
+    if(value_increment < 0 || typeof value_increment !== 'number') return
     // Поиск узла по идентификатору node_id
     let node = Tree.find(tree => tree.id === node_id)
     // Если для узла задан родитель и его идентификатор число
