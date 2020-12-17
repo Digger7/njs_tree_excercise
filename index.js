@@ -12,20 +12,20 @@ function incValue(node_id, value_increment) {
     }
     // Поиск детей у родителя узла
     let chilldren = Tree.filter(tree => tree.parent_id === node.parent_id && node.parent_id !== undefined)
-    for (var i = 0; i < chilldren.length; i++) {
-        if(typeof chilldren[i].value !== 'number') chilldren[i].value = 0
+    for (let child of chilldren) {
+        if(typeof child.value !== 'number') child.value = 0
         let brotherIncrement = value_increment * 0.1
         // нельзя увеличивать значение у "брата" более чем в 2 раза за шаг
-        if(brotherIncrement > chilldren[i].value) brotherIncrement = chilldren[i].value     
-        chilldren[i].value = chilldren[i].value + brotherIncrement
+        if(brotherIncrement > child.value) brotherIncrement = child.value     
+        child.value = child.value + brotherIncrement
         //значение для вычислений, число с плавающей точкой имеющей всего две значащих цифры, лишние значащие цифры просто отбрасываются
-        chilldren[i].value = Number(chilldren[i].value.toFixed(2))
+        child.value = +(child.value.toFixed(2))
     }  
     // Если поле value отсутствует, пустое, или является некорректным числом, то считается что value = 0
     if(typeof node.value !== 'number') node.value = 0
     node.value = node.value + value_increment
     //значение для вычислений, число с плавающей точкой имеющей всего две значащих цифры, лишние значащие цифры просто отбрасываются
-    node.value = Number(node.value.toFixed(2))
+    node.value = +(node.value.toFixed(2))
 }
 
 // Test cases
